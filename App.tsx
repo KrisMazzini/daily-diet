@@ -11,6 +11,7 @@ import {
 } from '@expo-google-fonts/nunito'
 
 import { Loading } from '@components/Loading'
+import { Routes } from './src/routes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Nunito_400Regular, Nunito_700Bold })
@@ -18,7 +19,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar animated />
-      {fontsLoaded ? <></> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   )
 }
