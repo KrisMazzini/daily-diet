@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import { View } from 'react-native'
 
 import {
@@ -18,6 +19,12 @@ import { Overview } from './components/Overview'
 import { Meals } from './components/Meals'
 
 export function Home() {
+  const navigation = useNavigation()
+
+  function handleNewMeal() {
+    navigation.navigate('new')
+  }
+
   return (
     <Container edges={['top', 'left', 'right']}>
       <Header>
@@ -32,7 +39,7 @@ export function Home() {
 
       <View style={{ gap: 8 }}>
         <Text>Refeições</Text>
-        <Button title="Nova refeição" icon="add" />
+        <Button title="Nova refeição" icon="add" onPress={handleNewMeal} />
       </View>
 
       <Meals />

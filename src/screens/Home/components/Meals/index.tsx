@@ -1,9 +1,9 @@
 import { SectionList } from 'react-native'
+import dayjs from 'dayjs'
 
 import { Container, Title } from './styles'
 import { Meal, MealType } from './Meal'
 
-import { formatDate } from '@utils/formatter'
 import { EmptyList } from './EmptyList'
 
 interface MealSectionType {
@@ -98,7 +98,7 @@ export function Meals() {
         renderItem={({ item }) => <Meal {...item} />}
         renderSectionHeader={({ section }) => (
           <Title isFirstSection={section.title === meals[0].title}>
-            {formatDate(section.title)}
+            {dayjs(section.title).format('DD.MM.YYYY')}
           </Title>
         )}
         ListEmptyComponent={() => <EmptyList />}
