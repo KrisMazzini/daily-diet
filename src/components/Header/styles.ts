@@ -18,7 +18,6 @@ export const Container = styled.View<ContainerProps>`
   ${({ spacing }) =>
     spacing === 'DEFAULT'
       ? css`
-          width: calc(100% - 48px);
           margin: 16px 24px 24px;
         `
       : css`
