@@ -4,6 +4,9 @@ export declare global {
       home: undefined
       stats: undefined
       new: undefined
+      feedback: {
+        withinDiet: boolean
+      }
     }
   }
 }

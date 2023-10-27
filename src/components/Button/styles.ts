@@ -2,16 +2,22 @@ import styled, { css } from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 export type ButtonStyleType = 'PRIMARY' | 'SECONDARY'
+export type ButtonSizeType = 'FILL' | 'HUG'
 
 interface TypeProps {
   type: ButtonStyleType
 }
 
-export const Container = styled.TouchableOpacity<TypeProps>`
+interface ButtonProps extends TypeProps {
+  size: ButtonSizeType
+}
+
+export const Container = styled.TouchableOpacity<ButtonProps>`
   min-height: 50px;
   max-height: 50px;
+  padding: 16px 24px;
 
-  width: 100%;
+  ${({ size }) => size === 'FILL' && 'width: 100%;'};
 
   flex-direction: row;
   align-items: center;

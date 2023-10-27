@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
+
 import { Col, Container, Form, Row } from './styles'
 
 import { Header } from '@components/Header'
@@ -9,6 +11,12 @@ import { Boolean } from '@components/Boolean'
 import { Button } from '@components/Button'
 
 export function NewMeal() {
+  const navigation = useNavigation()
+
+  function handleRegisterMeal() {
+    navigation.navigate('feedback', { withinDiet: true })
+  }
+
   return (
     <Container edges={['top', 'left', 'right']}>
       <Header title="Nova refeição" spacing="DEFAULT" />
@@ -30,7 +38,11 @@ export function NewMeal() {
 
           <Boolean label="Está dentro da dieta?" />
 
-          <Button title="Cadastrar refeição" style={{ marginTop: 'auto' }} />
+          <Button
+            title="Cadastrar refeição"
+            style={{ marginTop: 'auto' }}
+            onPress={handleRegisterMeal}
+          />
         </Form>
       </Box>
     </Container>
