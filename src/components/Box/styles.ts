@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex: 1;
 
   border-radius: 20px;
-  padding: 32px 24px;
+  padding: 40px 24px;
 
   background-color: ${({ theme }) => theme.COLORS.GRAY_7};
 `
