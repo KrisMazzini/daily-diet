@@ -15,35 +15,34 @@ export function TimePicker({ label }: TimePickerProps) {
 
   const [date, setDate] = useState<Date | undefined>()
   const [timePickerValue, setTimePickerValue] = useState<Date>(new Date())
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   return (
     <Container>
       <Label>{label}</Label>
 
+      <ValueWrapper onPress={() => setIsModalVisible(true)}>
+        <Value>{date && dayjs(date).format('HH:mm')}</Value>
+      </ValueWrapper>
+
       <Modal
-        trigger={
-          <ValueWrapper>
-            <Value>{date && dayjs(date).format('HH:mm')}</Value>
-          </ValueWrapper>
-        }
-        content={
-          <DateTimePicker
-            mode="time"
-            value={timePickerValue}
-            onChange={(_, selectedDate) => {
-              if (selectedDate) {
-                setTimePickerValue(selectedDate)
-              }
-            }}
-            display="spinner"
-            textColor={COLORS.GRAY_1}
-            locale="pt-BR"
-          />
-        }
-        onConfirm={() => {
-          setDate(timePickerValue)
-        }}
-      />
+        visible={isModalVisible}
+        onVisibleChange={setIsModalVisible}
+        onConfirm={() => setDate(timePickerValue)}
+      >
+        <DateTimePicker
+          mode="time"
+          value={timePickerValue}
+          onChange={(_, selectedDate) => {
+            if (selectedDate) {
+              setTimePickerValue(selectedDate)
+            }
+          }}
+          display="spinner"
+          textColor={COLORS.GRAY_1}
+          locale="pt-BR"
+        />
+      </Modal>
     </Container>
   )
 }

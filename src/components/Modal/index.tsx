@@ -1,57 +1,47 @@
-import { ReactNode, useState } from 'react'
-import { Modal as NativeModal, TouchableOpacity, View } from 'react-native'
+import { ReactNode } from 'react'
+import { Modal as NativeModal, View } from 'react-native'
 
 import { Action, Actions, Container, Content } from './styles'
 
 import { Button } from '@components/Button'
 
 interface ModalProps {
-  trigger: ReactNode
-  content: ReactNode
+  children: ReactNode
   cancelButtonTitle?: string
   confirmButtonTitle?: string
+  visible?: boolean
+  onVisibleChange: (visible: boolean) => void
   onCancel?: () => void
   onConfirm?: () => void
 }
 
 export function Modal({
-  trigger,
-  content,
+  children,
   cancelButtonTitle = 'Cancelar',
   confirmButtonTitle = 'Confirmar',
+  visible = false,
+  onVisibleChange,
   onCancel,
   onConfirm,
 }: ModalProps) {
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  function handleOpenModal() {
-    setIsModalVisible(true)
-  }
-
   function handleCancel() {
-    if (onCancel) {
-      onCancel()
-    }
+    onCancel?.()
 
-    setIsModalVisible(false)
+    onVisibleChange?.(false)
   }
 
   function handleConfirm() {
-    if (onConfirm) {
-      onConfirm()
-    }
+    onConfirm?.()
 
-    setIsModalVisible(false)
+    onVisibleChange?.(false)
   }
 
   return (
     <View>
-      <TouchableOpacity onPress={handleOpenModal}>{trigger}</TouchableOpacity>
-
-      <NativeModal transparent visible={isModalVisible}>
+      <NativeModal transparent visible={visible}>
         <Container>
           <Content>
-            {content}
+            {children}
 
             <Actions>
               <Action>

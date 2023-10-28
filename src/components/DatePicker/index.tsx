@@ -15,35 +15,34 @@ export function DatePicker({ label }: DatePickerProps) {
 
   const [date, setDate] = useState<Date | undefined>()
   const [datePickerValue, setDatePickerValue] = useState<Date>(new Date())
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   return (
     <Container>
       <Label>{label}</Label>
 
+      <ValueWrapper onPress={() => setIsModalVisible(true)}>
+        <Value>{date && dayjs(date).format('DD/MM/YYYY')}</Value>
+      </ValueWrapper>
+
       <Modal
-        trigger={
-          <ValueWrapper>
-            <Value>{date && dayjs(date).format('DD/MM/YYYY')}</Value>
-          </ValueWrapper>
-        }
-        content={
-          <DateTimePicker
-            mode="date"
-            value={datePickerValue}
-            onChange={(_, selectedDate) => {
-              if (selectedDate) {
-                setDatePickerValue(selectedDate)
-              }
-            }}
-            display="spinner"
-            textColor={COLORS.GRAY_1}
-            locale="pt-BR"
-          />
-        }
-        onConfirm={() => {
-          setDate(datePickerValue)
-        }}
-      />
+        visible={isModalVisible}
+        onVisibleChange={setIsModalVisible}
+        onConfirm={() => setDate(datePickerValue)}
+      >
+        <DateTimePicker
+          mode="date"
+          value={datePickerValue}
+          onChange={(_, selectedDate) => {
+            if (selectedDate) {
+              setDatePickerValue(selectedDate)
+            }
+          }}
+          display="spinner"
+          textColor={COLORS.GRAY_1}
+          locale="pt-BR"
+        />
+      </Modal>
     </Container>
   )
 }

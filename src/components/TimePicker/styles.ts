@@ -12,7 +12,7 @@ export const Label = styled.Text`
   `}
 `
 
-export const ValueWrapper = styled.View`
+export const ValueWrapper = styled.TouchableOpacity`
   min-height: 48px;
 
   padding: 14px;
