@@ -32,7 +32,7 @@ export const Divider = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_4};
 `
 
-export const Description = styled.Text`
+export const Name = styled.Text`
   flex: 1;
 
   ${({ theme }) => css`
