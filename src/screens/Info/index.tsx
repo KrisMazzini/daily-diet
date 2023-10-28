@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import dayjs from 'dayjs'
 
 import {
@@ -31,10 +31,15 @@ interface RouteParams {
 export function Info() {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
+  const navigation = useNavigation()
   const route = useRoute()
 
-  const { name, description, datetime, withinDiet } =
+  const { id, name, description, datetime, withinDiet } =
     route.params as RouteParams
+
+  function handleEditMeal() {
+    navigation.navigate('edit', { id, name, description, datetime, withinDiet })
+  }
 
   return (
     <Container
@@ -58,7 +63,11 @@ export function Info() {
         </Badge>
 
         <Actions>
-          <Button title="Editar refeição" icon="edit" />
+          <Button
+            title="Editar refeição"
+            icon="edit"
+            onPress={handleEditMeal}
+          />
 
           <Button
             type="SECONDARY"
