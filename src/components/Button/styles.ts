@@ -15,7 +15,7 @@ interface ButtonProps extends TypeProps {
 export const Container = styled.TouchableOpacity<ButtonProps>`
   min-height: 50px;
   max-height: 50px;
-  padding: 16px 24px;
+  padding: 0 24px;
 
   ${({ size }) => size === 'FILL' && 'width: 100%;'};
 
