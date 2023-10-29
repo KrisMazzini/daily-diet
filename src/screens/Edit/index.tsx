@@ -248,15 +248,15 @@ export function EditMeal() {
                 />
               )}
             />
-
-            <Button
-              title="Salvar alterações"
-              style={{ marginTop: 'auto' }}
-              onPress={handleSubmit(handleSaveChanges)}
-              disabled={isSubmitting}
-              loading={isSubmitting}
-            />
           </Form>
+
+          <Button
+            title="Salvar alterações"
+            style={{ marginTop: 'auto' }}
+            onPress={handleSubmit(handleSaveChanges)}
+            disabled={isSubmitting}
+            loading={isSubmitting}
+          />
         </Box>
       </Pressable>
     </Container>

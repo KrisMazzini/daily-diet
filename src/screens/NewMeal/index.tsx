@@ -190,15 +190,15 @@ export function NewMeal() {
                 />
               )}
             />
-
-            <Button
-              title="Cadastrar refeição"
-              style={{ marginTop: 'auto' }}
-              onPress={handleSubmit(handleRegisterMeal)}
-              loading={isSubmitting}
-              disabled={isSubmitting}
-            />
           </Form>
+
+          <Button
+            title="Cadastrar refeição"
+            style={{ marginTop: 'auto' }}
+            onPress={handleSubmit(handleRegisterMeal)}
+            loading={isSubmitting}
+            disabled={isSubmitting}
+          />
         </Box>
       </Pressable>
     </Container>
