@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { Alert } from 'react-native'
+import { Alert, Keyboard, Pressable } from 'react-native'
 import {
   useFocusEffect,
   useNavigation,
@@ -172,91 +172,93 @@ export function EditMeal() {
 
   return (
     <Container edges={['top', 'left', 'right']}>
-      <Header title="Editar refeição" spacing="DEFAULT" />
+      <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
+        <Header title="Editar refeição" spacing="DEFAULT" />
 
-      <Box>
-        <Form>
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <Input
-                label="Nome"
-                value={field.value}
-                error={errors.name?.message}
-                onChangeText={field.onChange}
-              />
-            )}
-          />
+        <Box>
+          <Form>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  label="Nome"
+                  value={field.value}
+                  error={errors.name?.message}
+                  onChangeText={field.onChange}
+                />
+              )}
+            />
 
-          <Controller
-            name="description"
-            control={control}
-            render={({ field }) => (
-              <Input
-                label="Descrição"
-                multiline
-                value={field.value}
-                error={errors.description?.message}
-                onChangeText={field.onChange}
-              />
-            )}
-          />
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  label="Descrição"
+                  multiline
+                  value={field.value}
+                  error={errors.description?.message}
+                  onChangeText={field.onChange}
+                />
+              )}
+            />
 
-          <Row>
-            <Col>
-              <Controller
-                name="date"
-                control={control}
-                render={({ field }) => (
-                  <DatePicker
-                    label="Data"
-                    value={field.value}
-                    error={errors.date?.message}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </Col>
+            <Row>
+              <Col>
+                <Controller
+                  name="date"
+                  control={control}
+                  render={({ field }) => (
+                    <DatePicker
+                      label="Data"
+                      value={field.value}
+                      error={errors.date?.message}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </Col>
 
-            <Col>
-              <Controller
-                name="time"
-                control={control}
-                render={({ field }) => (
-                  <TimePicker
-                    label="Hora"
-                    value={field.value}
-                    error={errors.time?.message}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </Col>
-          </Row>
+              <Col>
+                <Controller
+                  name="time"
+                  control={control}
+                  render={({ field }) => (
+                    <TimePicker
+                      label="Hora"
+                      value={field.value}
+                      error={errors.time?.message}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </Col>
+            </Row>
 
-          <Controller
-            name="withinDiet"
-            control={control}
-            render={({ field }) => (
-              <Boolean
-                label="Está dentro da dieta?"
-                value={field.value}
-                error={errors.withinDiet?.message}
-                onChange={field.onChange}
-              />
-            )}
-          />
+            <Controller
+              name="withinDiet"
+              control={control}
+              render={({ field }) => (
+                <Boolean
+                  label="Está dentro da dieta?"
+                  value={field.value}
+                  error={errors.withinDiet?.message}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
-          <Button
-            title="Salvar alterações"
-            style={{ marginTop: 'auto' }}
-            onPress={handleSubmit(handleSaveChanges)}
-            disabled={isSubmitting}
-            loading={isSubmitting}
-          />
-        </Form>
-      </Box>
+            <Button
+              title="Salvar alterações"
+              style={{ marginTop: 'auto' }}
+              onPress={handleSubmit(handleSaveChanges)}
+              disabled={isSubmitting}
+              loading={isSubmitting}
+            />
+          </Form>
+        </Box>
+      </Pressable>
     </Container>
   )
 }

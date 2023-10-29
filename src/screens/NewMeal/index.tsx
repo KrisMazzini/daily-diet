@@ -1,5 +1,5 @@
 import 'react-native-get-random-values'
-import { Alert } from 'react-native'
+import { Alert, Keyboard, Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -114,91 +114,93 @@ export function NewMeal() {
 
   return (
     <Container edges={['top', 'left', 'right']}>
-      <Header title="Nova refeição" spacing="DEFAULT" />
+      <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
+        <Header title="Nova refeição" spacing="DEFAULT" />
 
-      <Box>
-        <Form>
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <Input
-                label="Nome"
-                value={field.value}
-                error={errors.name?.message}
-                onChangeText={field.onChange}
-              />
-            )}
-          />
+        <Box>
+          <Form>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  label="Nome"
+                  value={field.value}
+                  error={errors.name?.message}
+                  onChangeText={field.onChange}
+                />
+              )}
+            />
 
-          <Controller
-            name="description"
-            control={control}
-            render={({ field }) => (
-              <Input
-                label="Descrição"
-                multiline
-                value={field.value}
-                error={errors.description?.message}
-                onChangeText={field.onChange}
-              />
-            )}
-          />
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  label="Descrição"
+                  multiline
+                  value={field.value}
+                  error={errors.description?.message}
+                  onChangeText={field.onChange}
+                />
+              )}
+            />
 
-          <Row>
-            <Col>
-              <Controller
-                name="date"
-                control={control}
-                render={({ field }) => (
-                  <DatePicker
-                    label="Data"
-                    value={field.value}
-                    error={errors.date?.message}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </Col>
+            <Row>
+              <Col>
+                <Controller
+                  name="date"
+                  control={control}
+                  render={({ field }) => (
+                    <DatePicker
+                      label="Data"
+                      value={field.value}
+                      error={errors.date?.message}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </Col>
 
-            <Col>
-              <Controller
-                name="time"
-                control={control}
-                render={({ field }) => (
-                  <TimePicker
-                    label="Hora"
-                    value={field.value}
-                    error={errors.time?.message}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </Col>
-          </Row>
+              <Col>
+                <Controller
+                  name="time"
+                  control={control}
+                  render={({ field }) => (
+                    <TimePicker
+                      label="Hora"
+                      value={field.value}
+                      error={errors.time?.message}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </Col>
+            </Row>
 
-          <Controller
-            name="withinDiet"
-            control={control}
-            render={({ field }) => (
-              <Boolean
-                label="Está dentro da dieta?"
-                value={field.value}
-                error={errors.withinDiet?.message}
-                onChange={field.onChange}
-              />
-            )}
-          />
+            <Controller
+              name="withinDiet"
+              control={control}
+              render={({ field }) => (
+                <Boolean
+                  label="Está dentro da dieta?"
+                  value={field.value}
+                  error={errors.withinDiet?.message}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
-          <Button
-            title="Cadastrar refeição"
-            style={{ marginTop: 'auto' }}
-            onPress={handleSubmit(handleRegisterMeal)}
-            loading={isSubmitting}
-            disabled={isSubmitting}
-          />
-        </Form>
-      </Box>
+            <Button
+              title="Cadastrar refeição"
+              style={{ marginTop: 'auto' }}
+              onPress={handleSubmit(handleRegisterMeal)}
+              loading={isSubmitting}
+              disabled={isSubmitting}
+            />
+          </Form>
+        </Box>
+      </Pressable>
     </Container>
   )
 }

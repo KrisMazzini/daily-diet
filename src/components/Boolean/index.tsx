@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Keyboard } from 'react-native'
 
 import {
   Container,
@@ -28,6 +29,7 @@ export function Boolean({
   const [value, setValue] = useState<boolean | undefined>(valueParam)
 
   function handleSetValue(newValue: boolean) {
+    Keyboard.dismiss()
     setValue(newValue)
     onChange?.(newValue)
   }

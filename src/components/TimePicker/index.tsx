@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Keyboard } from 'react-native'
 import { useTheme } from 'styled-components/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import dayjs from 'dayjs'
@@ -20,6 +21,11 @@ export function TimePicker({ label, value, error, onChange }: TimePickerProps) {
   const [timePickerValue, setTimePickerValue] = useState<Date>(new Date())
   const [isModalVisible, setIsModalVisible] = useState(false)
 
+  function handleOpenModal() {
+    Keyboard.dismiss()
+    setIsModalVisible(true)
+  }
+
   function handleDateChange() {
     setTime(timePickerValue)
     onChange?.(timePickerValue)
@@ -33,7 +39,7 @@ export function TimePicker({ label, value, error, onChange }: TimePickerProps) {
     <Container>
       <Label>{label}</Label>
 
-      <ValueWrapper hasError={!!error} onPress={() => setIsModalVisible(true)}>
+      <ValueWrapper hasError={!!error} onPress={handleOpenModal}>
         <Value>{time && dayjs(time).format('HH:mm')}</Value>
       </ValueWrapper>
 
