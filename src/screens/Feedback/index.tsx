@@ -22,7 +22,7 @@ export function Feedback() {
   if (withinDiet) {
     return (
       <Container>
-        <Title type="POSITIVE">Continuer assim!</Title>
+        <Title type="POSITIVE">Continue assim!</Title>
         <Subtitle>
           Você continua <Bold>dentro da dieta</Bold>. Muito bem!
         </Subtitle>
