@@ -1,34 +1,48 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import dayjs from 'dayjs'
 
-import { Container, Label, Value, ValueWrapper } from './styles'
+import { Container, Error, Label, Value, ValueWrapper } from './styles'
 import { Modal } from '@components/Modal'
 
 interface TimePickerProps {
   label: string
+  value?: Date
+  error?: string
+  onChange?: (date: Date) => void
 }
 
-export function TimePicker({ label }: TimePickerProps) {
+export function TimePicker({ label, value, error, onChange }: TimePickerProps) {
   const { COLORS } = useTheme()
 
-  const [date, setDate] = useState<Date | undefined>()
+  const [time, setTime] = useState<Date | undefined>(value)
   const [timePickerValue, setTimePickerValue] = useState<Date>(new Date())
   const [isModalVisible, setIsModalVisible] = useState(false)
+
+  function handleDateChange() {
+    setTime(timePickerValue)
+    onChange?.(timePickerValue)
+  }
+
+  useEffect(() => {
+    setTimePickerValue(value || new Date())
+  }, [value])
 
   return (
     <Container>
       <Label>{label}</Label>
 
-      <ValueWrapper onPress={() => setIsModalVisible(true)}>
-        <Value>{date && dayjs(date).format('HH:mm')}</Value>
+      <ValueWrapper hasError={!!error} onPress={() => setIsModalVisible(true)}>
+        <Value>{time && dayjs(time).format('HH:mm')}</Value>
       </ValueWrapper>
+
+      {error && <Error>{error}</Error>}
 
       <Modal
         visible={isModalVisible}
         onVisibleChange={setIsModalVisible}
-        onConfirm={() => setDate(timePickerValue)}
+        onConfirm={handleDateChange}
       >
         <DateTimePicker
           mode="time"

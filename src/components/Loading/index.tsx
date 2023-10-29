@@ -1,9 +1,13 @@
-import { Container, Indicator } from './styles'
+import { Container, Indicator, LoadingStyleType } from './styles'
 
-export function Loading() {
+interface LoadingProps {
+  type?: LoadingStyleType
+}
+
+export function Loading({ type = 'PRIMARY' }: LoadingProps) {
   return (
-    <Container>
-      <Indicator />
+    <Container type={type}>
+      <Indicator type={type} />
     </Container>
   )
 }

@@ -3,31 +3,13 @@ import dayjs from 'dayjs'
 
 import { Container, Name, Divider, Indicator, Time } from './styles'
 
-export interface MealType {
-  id: string
-  name: string
-  description: string
-  datetime: string
-  withinDiet: boolean
-}
+import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
 
-export function Meal({
-  id,
-  name,
-  description,
-  datetime,
-  withinDiet,
-}: MealType) {
+export function Meal({ id, name, datetime, withinDiet }: MealStorageDTO) {
   const navigation = useNavigation()
 
   function handleMealDetails() {
-    navigation.navigate('info', {
-      id,
-      name,
-      description,
-      datetime,
-      withinDiet,
-    })
+    navigation.navigate('info', { id })
   }
 
   return (

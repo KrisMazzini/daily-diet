@@ -12,12 +12,18 @@ export const Label = styled.Text`
   `}
 `
 
-export const ValueWrapper = styled.TouchableOpacity`
+interface WrapperProps {
+  hasError?: boolean
+}
+
+export const ValueWrapper = styled.TouchableOpacity<WrapperProps>`
   min-height: 48px;
 
   padding: 14px;
   border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_5};
+  border: 1px solid
+    ${({ theme, hasError }) =>
+      hasError ? theme.COLORS.RED_DARK : theme.COLORS.GRAY_5};
 `
 
 export const Value = styled.Text`
@@ -25,5 +31,13 @@ export const Value = styled.Text`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     font-size: ${theme.FONT_SIZE.MD};
     color: ${theme.COLORS.GRAY_1};
+  `}
+`
+
+export const Error = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    font-size: ${theme.FONT_SIZE.SM};
+    color: ${theme.COLORS.RED_DARK};
   `}
 `

@@ -79,3 +79,11 @@ export const YesIndicator = styled(Indicator)`
 export const NoIndicator = styled(Indicator)`
   background-color: ${({ theme }) => theme.COLORS.RED_DARK};
 `
+
+export const Error = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    font-size: ${theme.FONT_SIZE.SM};
+    color: ${theme.COLORS.RED_DARK};
+  `}
+`

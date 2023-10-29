@@ -4,27 +4,45 @@ import { Box } from '@components/Box'
 import { Overview } from './components/Overview'
 import { Card } from './components/Card'
 
+import { useMeals } from '@hooks/useMeals'
+
 export function Stats() {
+  const {
+    registeredMeals,
+    mealsWithinDiet,
+    mealsOutOfDiet,
+    percentageOfMealsWithinDiet,
+    bestStreak,
+  } = useMeals()
+
+  const positiveStats = percentageOfMealsWithinDiet >= 60
+
   return (
-    <Container colorIndicator="POSITIVE" edges={['top', 'left', 'right']}>
+    <Container
+      colorIndicator={positiveStats ? 'POSITIVE' : 'NEGATIVE'}
+      edges={['top', 'left', 'right']}
+    >
       <Overview />
 
       <Box title="Estatísticas gerais">
         <Data>
-          <Card value={22} label="melhor sequência de pratos dentro da dieta" />
-          <Card value={109} label="refeições registradas" />
+          <Card
+            value={bestStreak}
+            label="melhor sequência de pratos dentro da dieta"
+          />
+          <Card value={registeredMeals} label="refeições registradas" />
 
           <CardGroup>
             <Card
               direction="ROW"
               color="POSITIVE"
-              value={99}
+              value={mealsWithinDiet}
               label="refeições dentro da dieta"
             />
             <Card
               direction="ROW"
               color="NEGATIVE"
-              value={10}
+              value={mealsOutOfDiet}
               label="refeições fora da dieta"
             />
           </CardGroup>

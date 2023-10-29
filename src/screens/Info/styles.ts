@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled, { css } from 'styled-components/native'
 
-type ColorStyleType = 'POSITIVE' | 'NEGATIVE'
+type ColorStyleType = 'POSITIVE' | 'NEGATIVE' | 'DEFAULT'
 
 interface ContainerProps {
   type: ColorStyleType
@@ -9,8 +9,16 @@ interface ContainerProps {
 
 export const Container = styled(SafeAreaView)<ContainerProps>`
   flex: 1;
-  background-color: ${({ theme, type }) =>
-    type === 'POSITIVE' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+  background-color: ${({ theme, type }) => {
+    switch (type) {
+      case 'POSITIVE':
+        return theme.COLORS.GREEN_LIGHT
+      case 'NEGATIVE':
+        return theme.COLORS.RED_LIGHT
+      case 'DEFAULT':
+        return theme.COLORS.GRAY_5
+    }
+  }};
 `
 
 export const Title = styled.Text`
@@ -99,6 +107,22 @@ export const DeleteConfirmationMessage = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.LG};
+    color: ${theme.COLORS.GRAY_2};
+    text-align: center;
+  `}
+`
+
+export const NotFound = styled(SafeAreaView)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+`
+
+export const NotFoundMessage = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    font-size: ${theme.FONT_SIZE.MD};
     color: ${theme.COLORS.GRAY_2};
     text-align: center;
   `}

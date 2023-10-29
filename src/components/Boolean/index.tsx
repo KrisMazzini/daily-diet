@@ -1,6 +1,8 @@
 import { useState } from 'react'
+
 import {
   Container,
+  Error,
   Label,
   No,
   NoIndicator,
@@ -12,10 +14,23 @@ import {
 
 interface BooleanProps {
   label: string
+  value?: boolean
+  error?: string
+  onChange?: (value: boolean) => void
 }
 
-export function Boolean({ label }: BooleanProps) {
-  const [value, setValue] = useState<boolean | undefined>()
+export function Boolean({
+  label,
+  value: valueParam,
+  error,
+  onChange,
+}: BooleanProps) {
+  const [value, setValue] = useState<boolean | undefined>(valueParam)
+
+  function handleSetValue(newValue: boolean) {
+    setValue(newValue)
+    onChange?.(newValue)
+  }
 
   return (
     <Container>
@@ -25,7 +40,7 @@ export function Boolean({ label }: BooleanProps) {
         <Yes
           selected={value === true}
           disabled={value === true}
-          onPress={() => setValue(true)}
+          onPress={() => handleSetValue(true)}
         >
           <YesIndicator />
           <OptionTitle>Sim</OptionTitle>
@@ -34,12 +49,14 @@ export function Boolean({ label }: BooleanProps) {
         <No
           selected={value === false}
           disabled={value === false}
-          onPress={() => setValue(false)}
+          onPress={() => handleSetValue(false)}
         >
           <NoIndicator />
           <OptionTitle>Não</OptionTitle>
         </No>
       </Options>
+
+      {error && <Error>{error}</Error>}
     </Container>
   )
 }

@@ -9,17 +9,9 @@ export declare global {
       }
       info: {
         id: string
-        name: string
-        description: string
-        datetime: string
-        withinDiet: boolean
       }
       edit: {
         id: string
-        name: string
-        description: string
-        datetime: string
-        withinDiet: boolean
       }
     }
   }
