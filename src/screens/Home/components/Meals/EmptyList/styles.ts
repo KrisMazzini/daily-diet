@@ -11,5 +11,6 @@ export const Message = styled.Text`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     font-size: ${theme.FONT_SIZE.MD};
     color: ${theme.COLORS.GRAY_2};
+    text-align: center;
   `}
 `
